@@ -21,6 +21,8 @@ import PdfViewNativeComponent, {
   } from './fabric/RNPDFPdfNativeComponent';
 import ReactNativeBlobUtil from 'react-native-blob-util'
 import {ViewPropTypes} from 'deprecated-react-native-prop-types';
+import { ProgressBar } from '@react-native-community/progress-bar-android'
+import { ProgressView } from '@react-native-community/progress-view'
 const SHA1 = require('crypto-js/sha1');
 import PdfView from './PdfView';
 
@@ -396,9 +398,24 @@ export default class Pdf extends Component {
                             (<View
                                 style={styles.progressContainer}
                             >
-                                {this.props.renderActivityIndicator
-                                    ? this.props.renderActivityIndicator(this.state.progress)
-                                    : <Text>{`${(this.state.progress * 100).toFixed(2)}%`}</Text>}
+                    {this.props.activityIndicator
+                                    ? this.props.activityIndicator
+                                    : Platform.OS === 'android'
+                                        ? <ProgressBar
+                                            progress={this.state.progress}
+                                            indeterminate={false}
+                                            styleAttr="Horizontal"
+                                            style={styles.progressBar}
+                                            {...this.props.activityIndicatorProps}
+                                        />
+                                        : <ProgressView
+                                            progress={this.state.progress}
+                                            style={styles.progressBar}
+                                            {...this.props.activityIndicatorProps}
+                                        />}
+//                                 {this.props.renderActivityIndicator
+//                                     ? this.props.renderActivityIndicator(this.state.progress)
+//                                     : <Text>{`${(this.state.progress * 100).toFixed(2)}%`}</Text>}
                             </View>):(
                                 Platform.OS === "android" || Platform.OS === "windows"?(
                                         <PdfCustom
