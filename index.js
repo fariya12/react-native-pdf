@@ -413,9 +413,9 @@ export default class Pdf extends Component {
                                             style={styles.progressBar}
                                             {...this.props.activityIndicatorProps}
                                         />}
-//                                 {this.props.renderActivityIndicator
-//                                     ? this.props.renderActivityIndicator(this.state.progress)
-//                                     : <Text>{`${(this.state.progress * 100).toFixed(2)}%`}</Text>}
+                                {/* {this.props.renderActivityIndicator
+                                     ? this.props.renderActivityIndicator(this.state.progress)
+                                    : <Text>{`${(this.state.progress * 100).toFixed(2)}%`}</Text>} */}
                             </View>):(
                                 Platform.OS === "android" || Platform.OS === "windows"?(
                                         <PdfCustom
